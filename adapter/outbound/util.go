@@ -4,14 +4,12 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"net"
-	"net/netip"
-	"sync"
-	"time"
-
 	"github.com/Dreamacro/clash/component/resolver"
 	C "github.com/Dreamacro/clash/constant"
 	"github.com/Dreamacro/clash/transport/socks5"
+	"net"
+	"net/netip"
+	"sync"
 )
 
 var (
@@ -20,10 +18,10 @@ var (
 )
 
 func tcpKeepAlive(c net.Conn) {
-	if tcp, ok := c.(*net.TCPConn); ok {
-		_ = tcp.SetKeepAlive(true)
-		_ = tcp.SetKeepAlivePeriod(30 * time.Second)
-	}
+	//if tcp, ok := c.(*net.TCPConn); ok {
+	//	_ = tcp.SetKeepAlive(true)
+	//	_ = tcp.SetKeepAlivePeriod(30 * time.Second)
+	//}
 }
 
 func getClientSessionCache() tls.ClientSessionCache {

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"net"
 	"strings"
-	"time"
 
 	"github.com/Dreamacro/clash/adapter/inbound"
 	"github.com/Dreamacro/clash/common/sockopt"
+	timeC "github.com/Dreamacro/clash/component/time"
 	C "github.com/Dreamacro/clash/constant"
 	LC "github.com/Dreamacro/clash/listener/config"
 	embedSS "github.com/Dreamacro/clash/listener/shadowsocks"
@@ -64,7 +64,7 @@ func New(config LC.ShadowsocksServer, tcpIn chan<- C.ConnContext, udpIn chan<- C
 	case common.Contains(shadowaead.List, config.Cipher):
 		sl.service, err = shadowaead.NewService(config.Cipher, nil, config.Password, udpTimeout, h)
 	case common.Contains(shadowaead_2022.List, config.Cipher):
-		sl.service, err = shadowaead_2022.NewServiceWithPassword(config.Cipher, config.Password, udpTimeout, h, time.Now)
+		sl.service, err = shadowaead_2022.NewServiceWithPassword(config.Cipher, config.Password, udpTimeout, h, timeC.Now)
 	default:
 		err = fmt.Errorf("shadowsocks: unsupported method: %s", config.Cipher)
 		return embedSS.New(config, tcpIn, udpIn)

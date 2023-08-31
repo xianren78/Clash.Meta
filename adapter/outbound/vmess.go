@@ -16,6 +16,7 @@ import (
 	"github.com/Dreamacro/clash/component/dialer"
 	"github.com/Dreamacro/clash/component/proxydialer"
 	"github.com/Dreamacro/clash/component/resolver"
+	timeC "github.com/Dreamacro/clash/component/time"
 	tlsC "github.com/Dreamacro/clash/component/tls"
 	C "github.com/Dreamacro/clash/constant"
 	"github.com/Dreamacro/clash/transport/gun"
@@ -416,6 +417,7 @@ func NewVmess(option VmessOption) (*Vmess, error) {
 	if option.AuthenticatedLength {
 		options = append(options, vmess.ClientWithAuthenticatedLength())
 	}
+	options = append(options, vmess.ClientWithTimeFunc(timeC.Now))
 	client, err := vmess.NewClient(option.UUID, security, option.AlterID, options...)
 	if err != nil {
 		return nil, err

@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/Dreamacro/clash/adapter/inbound"
+	timeC "github.com/Dreamacro/clash/component/time"
 	C "github.com/Dreamacro/clash/constant"
 	LC "github.com/Dreamacro/clash/listener/config"
 	"github.com/Dreamacro/clash/listener/sing"
@@ -42,7 +43,7 @@ func New(config LC.VmessServer, tcpIn chan<- C.ConnContext, udpIn chan<- C.Packe
 		Additions: additions,
 	}
 
-	service := vmess.NewService[string](h, vmess.ServiceWithDisableHeaderProtection())
+	service := vmess.NewService[string](h, vmess.ServiceWithDisableHeaderProtection(), vmess.ServiceWithTimeFunc(timeC.Now))
 	err = service.UpdateUsers(
 		common.Map(config.Users, func(it LC.VmessUser) string {
 			return it.Username

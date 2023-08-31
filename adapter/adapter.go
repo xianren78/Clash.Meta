@@ -16,6 +16,7 @@ import (
 	"github.com/Dreamacro/clash/common/queue"
 	"github.com/Dreamacro/clash/common/utils"
 	"github.com/Dreamacro/clash/component/dialer"
+	timeC "github.com/Dreamacro/clash/component/time"
 	C "github.com/Dreamacro/clash/constant"
 	"github.com/Dreamacro/clash/log"
 )
@@ -285,6 +286,8 @@ func (p *Proxy) URLTest(ctx context.Context, url string, expectedStatus utils.In
 	if err != nil {
 		return
 	}
+
+	timeC.SaveTimeFromHttpHeader(resp.Header)
 
 	_ = resp.Body.Close()
 

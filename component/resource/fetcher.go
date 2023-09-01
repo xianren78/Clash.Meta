@@ -3,6 +3,7 @@ package resource
 import (
 	"bytes"
 	"crypto/md5"
+	"github.com/samber/lo"
 	"os"
 	"path/filepath"
 	"time"

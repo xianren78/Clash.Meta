@@ -40,6 +40,12 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
+    - name: Patch mihomo updater URL
+      run: |
+        sed -i \
+        's#github.com/MetaCubeX/mihomo#github.com/xianren78/mihomo#g' \
+        component/updater/update_core.go
+
     - name: Set up Go
       if: ${{ matrix.jobs.goversion == '' }}
       uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c
